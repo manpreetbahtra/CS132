@@ -1,0 +1,165 @@
+ 
+Middle -- left
+
+	topBlock(connection,0x01, 0xFF, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	bottomBlock(connection,0x02, 0x3E, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	middleBlock(connection,0x01, 0xFF, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	middleBlock(connection,0x02, 0x3E, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	bottomBlock(connection,0x01, 0xFF, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	topBlock(connection,0x02, 0x3E, 1); //Left
+
+
+left -- Right
+
+    topBlock(connection,0x02, 0x3E, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	bottomBlock(connection,0x01, 0xC2, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	middleBlock(connection,0x02, 0x3E, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	middleBlock(connection,0x01, 0xC2, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	bottomBlock(connection,0x02, 0x3E, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	topBlock(connection,0x01, 0xC2, 1); //Left
+
+Right -- Middle
+
+    topBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	bottomBlock(connection,0x01, 0xFF, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	middleBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	middleBlock(connection,0x01, 0xFF, 1); //Left
+
+	lift(connection);
+	wait_until_done(connection, 2);
+
+	bottomBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	wait_until_done(connection, 2);
+	topBlock(connection,0x01, 0xFF, 1); //Left
+
+
+Towers of Hanoi -- Left --> Right
+
+	topBlock(connection,0x01, 0xC2, 0);
+	lift(connection);
+	bottomBlock(connection,0x02, 0x3E, 1);
+
+	lift(connection);
+
+	middleBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	bottomBlock(connection,0x01, 0xFF, 1); //Left
+
+	lift(connection);
+
+    bottomBlock(connection,0x02, 0x3E, 0); //Middle
+	lift(connection);
+	middleBlock(connection,0x01, 0xFF, 1); //Left
+
+	lift(connection);
+
+	bottomBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	bottomBlock(connection,0x02, 0x3E, 1); //Left
+
+	lift(connection);
+
+	middleBlock(connection,0x01, 0xFF, 0); //Middle
+	lift(connection);
+	bottomBlock(connection,0x01, 0xC2, 1);
+
+	lift(connection);
+
+	bottomBlock(connection,0x01, 0xFF, 0); //Middle
+	lift(connection);
+	middleBlock(connection,0x02, 0x3E, 1);
+
+	lift(connection);
+
+	bottomBlock(connection,0x01, 0xC2, 0); //Middle
+	lift(connection);
+	topBlock(connection,0x02, 0x3E, 1);
+
+	lift(connection);
+
+
+MiddleBlock --
+
+void middleBlock(int connection, int locH, int locL, int Grab){  //This function grabs/drops a block in the middle of a selected location
+	move_to_location(connection,1,locH,locL);  //Rotation
+	wait_until_done(connection, 1);
+	move_to_location(connection,2,0x01,0x22);
+	move_to_location(connection,3,0x01,0x8A);
+	move_to_location(connection,4,0x01,0x07);
+	wait_until_done(connection, 4);
+	if(Grab == 0){
+		grab(connection);
+	}else{
+		letGo(connection);
+	}
+	wait_until_done(connection, 5);
+}
+
+BottomBlock --
+void bottomBlock(int connection, int locH, int locL, int Grab){//This function grabs/drops a block on the bottom of a selected location
+	move_to_location(connection,1,locH,locL);  //Rotation
+	wait_until_done(connection, 1);
+	move_to_location(connection,2,0x01,0x0E);
+	move_to_location(connection,3,0x01,0x80);
+	move_to_location(connection,4,0x01,0x22);
+	wait_until_done(connection, 4);
+	if(Grab == 0){
+		grab(connection);
+	}else{
+		letGo(connection);
+	}
+	wait_until_done(connection, 5);
+}
+
+TopBlock --
+void topBlock(int connection, int locH, int locL, int Grab){//This function grabs/drops a block on the top of a selected location
+	move_to_location(connection,1,locH,locL);  //Rotation
+	wait_until_done(connection, 1);
+	move_to_location(connection,2,0x01,0x36);
+	move_to_location(connection,3,0x01,0x94);
+	move_to_location(connection,4,0x00,0xEB);
+	wait_until_done(connection, 4);
+	if(Grab == 0){
+		grab(connection);
+	}else{
+		letGo(connection);
+	}
+	wait_until_done(connection, 5);
+}
